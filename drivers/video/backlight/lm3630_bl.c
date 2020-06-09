@@ -611,12 +611,6 @@ static int lm3630_probe(struct i2c_client *client,
 		goto err_bl_dev_reg;
 	}
 
-#ifdef CONFIG_MACH_LGE
-	/* HACK: disable fb notifier unless off-mode charge */
-	if (lge_get_boot_mode() != LGE_BOOT_MODE_CHARGER)
-		fb_unregister_client(&bl_dev->fb_notif);
-#endif
-
 	bl_dev->props.max_brightness = dev->max_brightness;
 	bl_dev->props.brightness = dev->default_brightness;
 	bl_dev->props.power = FB_BLANK_UNBLANK;
